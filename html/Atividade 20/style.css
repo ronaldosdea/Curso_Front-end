@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.quadrado{
+    height: 50px;
+    width: 50px;
+    background-color: rgb(219, 15, 15);
+    margin: 5px;
+}
+.circulo{
+    border-radius: 50%;
+}
