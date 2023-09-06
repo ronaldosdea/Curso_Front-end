@@ -4,7 +4,7 @@
 }
 
 .fundo{
-    background-color: purple;
+    background-color: white;
     height: 100vh;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
@@ -14,10 +14,10 @@
 .calculadora{
     position: absolute;
     background-color: rgba(0, 0, 0, 0.8);
-    top: 50%;
-    left: 50%;
+    top: 25%;
+    left: 10%;
     transform: translate(-50%,-50%);
-    border-radius: 15px;
+    border-radius: 10px;
     padding: 15px;
 }
 
@@ -33,7 +33,7 @@
 }
 
 .botao:hover{
-    background-color: black;
+    background-color: red;
 }
 
 #resultado{
