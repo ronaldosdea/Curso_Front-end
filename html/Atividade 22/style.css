@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+}
+.container{
+    width: 80%;
+    height: 90%;
+    border: 3px dashed black;
+    margin:2em auto;
+}
+.quadrado{
+
+    height: 3em;
+    width: 3em;
+    background-color: blue;
+}
+.circulo{
+    border-radius: 50%;
+    width: 3em;
+    height: 3em;
+    background-color: red;
+}
+
+.hide{
+    display: none;
+}
