@@ -1,8 +1,14 @@
-const menu = document.querySelector(".material-symbols-outlined");
-const nav = document.querySelector("nav");
+const menuIcon = document.querySelector(".menu-icon");
+const navLinks = document.querySelector(".nav-links");
 
-menu.addEventListener("click", () => {
-    nav.classList.toggle("hide-icon");
+menuIcon.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+});
+
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+        navLinks.classList.remove("show");
+    }
 });
 
 
