@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #282c37 10%, #1e90ff 80%);
+    background-size: 200% 200%;
+    animation: gradientChange 10s linear infinite alternate;
+    transition: background-color 1s ease;
+}
+
+@keyframes gradientChange {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 0%; }
+}
+
+#clock-container {
+    text-align: center;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+#clock {
+    font-size: 48px;
+    font-weight: bold;
+    animation: pulseClock 1s infinite alternate;
+}
+
+@keyframes pulseClock {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}
+
+#day-icon, #night-icon {
+    font-size: 48px;
+    margin: 20px;
+    transition: transform 0.5s ease, color 0.5s ease;
+    animation: rotateIcon 4s linear infinite;
+}
+
+@keyframes rotateIcon {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-5px) rotate(360deg); }
+}
+
+.sunrise-sunset {
+    animation: sunriseSunset 10s infinite alternate;
+}
+
+@keyframes sunriseSunset {
+    0% { transform: translateY(0); color: #FFD700; }
+    100% { transform: translateY(-5px); color: #FF4500; }
+}

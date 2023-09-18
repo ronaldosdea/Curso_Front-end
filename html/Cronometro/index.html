@@ -7,6 +7,29 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Cronômetro </h1>
+    <div id="container">
+        <div id="display-container">
+            <div id="display">00:00:00</div>
+        </div>
+        <div id="buttons">
+            <button id="start">Iniciar</button>
+            <button id="stop">Parar</button>
+            <button id="continue">Continuar</button>
+            <button id="reset">Zerar</button>
+            <button id="lapButton">Volta</button>
+        </div>
+        <div id="lap">
+            Voltas:
+            <ul id="lapList"></ul>
+        </div>
+        <div id="timeLimitLabel">
+            Definir tempo limite (em segundos):
+            <input type="number" id="timeLimitInput" min="1" value="60">
+        </div>
+    </div>
     
+
+    <script src="script.js"></script>
 </body>
 </html>
