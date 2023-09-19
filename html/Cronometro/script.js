@@ -16,14 +16,14 @@ const display = document.getElementById("display");
 
         function startTimer() {
             isRunning = true;
-            timer = setInterval(updateDisplay, 1000);
+            timer = setInterval(updateDisplay, 100);
             startButton.disabled = true;
             stopButton.disabled = false;
             continueButton.disabled = true;
             resetButton.disabled = true;
             lapButton.disabled = false;
             timeLimitInput.disabled = true;
-            const timeLimit = parseInt(timeLimitInput.value) * 1000;
+            const timeLimit = parseInt(timeLimitInput.value) * 100;
             setTimeout(() => {
                 stopTimer();
                 alert("Tempo limite atingido!");
@@ -44,7 +44,7 @@ const display = document.getElementById("display");
         function continueTimer() {
             if (!isRunning) {
                 isRunning = true;
-                timer = setInterval(updateDisplay, 1000);
+                timer = setInterval(updateDisplay, 100);
                 startButton.disabled = true;
                 stopButton.disabled = false;
                 continueButton.disabled = true;
@@ -76,28 +76,40 @@ const display = document.getElementById("display");
                 lapCounter++;
             }
         }
-
         function updateDisplay() {
-            seconds++;
-            if (seconds === 60) {
-                seconds = 0;
-                minutes++;
-                if (minutes === 60) {
-                    minutes = 0;
-                    hours++;
-                }
+    seconds++;
+    if (seconds === 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes === 60) {
+            minutes = 0;
+            hours++;
+            if (hours === 24) {
+                hours = 0; 
             }
-
-            const formattedTime = `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
-            display.textContent = formattedTime;
         }
+    }
 
-        function padZero(value) {
-            return value < 10 ? `0${value}` : value;
-        }
+    const formattedTime = `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
+    display.textContent = formattedTime;
+    
+    if (hours === 0 && minutes === 0 && seconds === 0) {
+        resetTimerDisplay();
+    }
+}
+
+function resetTimerDisplay() {
+    display.textContent = "00:00:00";
+}
+
+function padZero(value) {
+    return value < 10 ? `0${value}` : value;
+}
 
         startButton.addEventListener("click", startTimer);
         stopButton.addEventListener("click", stopTimer);
         continueButton.addEventListener("click", continueTimer);
         resetButton.addEventListener("click", resetTimer);
         lapButton.addEventListener("click", lap);
+
+

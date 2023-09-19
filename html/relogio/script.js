@@ -1,39 +1,36 @@
 function updateClock() {
+    const timeElement = document.getElementById('time');
+    const dateElement = document.getElementById('date');
     const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const seconds = now.getSeconds();
-    const meridian = hours >= 12 ? "PM" : "AM";
-    const formattedHours = hours % 12 || 12; // Converter para formato 12 horas
+    const h = now.getHours().toString().padStart(2, '0');
+    const m = now.getMinutes().toString().padStart(2, '0');
+    const s = now.getSeconds().toString().padStart(2, '0');
+    
+    const timeString = `${h}:${m}:${s}`;
+    
+    timeElement.textContent = timeString;
+    
+    const hour = now.getHours();
+    const body = document.body;
 
-    const clockElement = document.getElementById("clock");
-    clockElement.textContent = `${formattedHours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')} ${meridian}`;
-
-    // Determinar o turno do dia com base na hora atual
-    let backgroundClass = "";
-    if (hours >= 5 && hours < 12) {
-        backgroundClass = "morning";
-        document.getElementById("day-icon").style.transform = "scale(1.2)";
-        document.getElementById("night-icon").style.transform = "scale(1)";
-    } else if (hours >= 12 && hours < 17) {
-        backgroundClass = "afternoon";
-        document.getElementById("day-icon").style.transform = "scale(1)";
-        document.getElementById("night-icon").style.transform = "scale(1)";
-    } else if (hours >= 17 && hours < 20) {
-        backgroundClass = "evening";
-        document.getElementById("day-icon").style.transform = "scale(1)";
-        document.getElementById("night-icon").style.transform = "scale(1)";
+    if (hour >= 5 && hour < 12) {
+        body.classList.remove('afternoon', 'evening', 'night');
+        body.classList.add('morning');
+    } else if (hour >= 12 && hour < 18) {
+        body.classList.remove('morning', 'evening', 'night');
+        body.classList.add('afternoon');
+    } else if (hour >= 18 && hour < 21) {
+        body.classList.remove('morning', 'afternoon', 'night');
+        body.classList.add('evening');
     } else {
-        backgroundClass = "night";
-        document.getElementById("day-icon").style.transform = "scale(1)";
-        document.getElementById("night-icon").style.transform = "scale(1.2)";
+        body.classList.remove('morning', 'afternoon', 'evening');
+        body.classList.add('night');
     }
 
-    document.body.className = backgroundClass;
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dateString = now.toLocaleDateString('pt-BR', options);
+    dateElement.textContent = dateString;
 }
 
-// Atualizar o relógio a cada segundo
 setInterval(updateClock, 1000);
-
-// Chamar a função para exibir o relógio imediatamente
 updateClock();

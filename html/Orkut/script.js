@@ -1,25 +1,43 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const loginForm = document.getElementById("login-form");
+function updateClock() {
+    const clock = document.getElementById('clock');
+    const hour = document.querySelector('.hour');
+    const minute = document.querySelector('.minute');
+    const second = document.querySelector('.second');
+    
+    const now = new Date();
+    const h = now.getHours();
+    const m = now.getMinutes();
+    const s = now.getSeconds();
+    
+    const rotationS = (s / 60) * 360 + 90;
+    const rotationM = ((m + s / 60) / 60) * 360 + 90;
+    const rotationH = ((h + m / 60) / 12) * 360 + 90;
+    
+    second.style.transform = `rotate(${rotationS}deg)`;
+    minute.style.transform = `rotate(${rotationM}deg)`;
+    hour.style.transform = `rotate(${rotationH}deg)`;
+}
 
-    loginForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+function updateBackground() {
+    const body = document.body;
+    const now = new Date();
+    const hour = now.getHours();
 
-        const usernameInput = document.getElementById("username");
-        const passwordInput = document.getElementById("password");
-
-        const username = usernameInput.value;
-        const password = passwordInput.value;
-
-        if (authenticate(username, password)) {
-            alert("Login bem-sucedido!");
-     
-        } else {
-            alert("Nome de usuário ou senha incorretos. Tente novamente.");
-        }
-    });
-
-    function authenticate(username, password) {
-      
-        return (username === "seu_nome_de_usuario" && password === "sua_senha");
+    if (hour >= 5 && hour < 12) {
+        body.classList.remove('afternoon', 'evening', 'night');
+        body.classList.add('morning');
+    } else if (hour >= 12 && hour < 18) {
+        body.classList.remove('morning', 'evening', 'night');
+        body.classList.add('afternoon');
+    } else if (hour >= 18 && hour < 21) {
+        body.classList.remove('morning', 'afternoon', 'night');
+        body.classList.add('evening');
+    } else {
+        body.classList.remove('morning', 'afternoon', 'evening');
+        body.classList.add('night');
     }
-});
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+updateBackground();

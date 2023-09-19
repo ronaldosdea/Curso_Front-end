@@ -1,59 +1,90 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
     display: flex;
-    justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #282c37 10%, #1e90ff 80%);
-    background-size: 200% 200%;
-    animation: gradientChange 10s linear infinite alternate;
-    transition: background-color 1s ease;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-image: url(../../Imagens/manarola-italy-building-hdr-wallpaper-preview.jpg); /* Adicione uma imagem de fundo estilizada */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    transition: background 3s ease;
 }
 
-@keyframes gradientChange {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 100% 0%; }
+.morning {
+    background-image: url(../../Imagens/pikachu.jpg); /* Imagem de fundo para a manhã */
 }
 
-#clock-container {
-    text-align: center;
+.afternoon {
+    background-image: url(../../Imagens/fim-de-tarde-na-praia_3378_800x600.jpg); /* Imagem de fundo para a tarde */
+}
+
+.evening {
+    background-image: url(../../Imagens/tira-grecia-montanhas-natureza-imagem-de-fundo.jpg); /* Imagem de fundo para a noite */
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
 }
 
-#clock {
-    font-size: 48px;
-    font-weight: bold;
-    animation: pulseClock 1s infinite alternate;
+.night {
+    background-image: url(../../Imagens/Coast_Italy_Houses_Sea_482252_1920x1080.jpg); /* Imagem de fundo para a noite */
+    color: #fff;
 }
 
-@keyframes pulseClock {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.05); }
+.clock-container {
+    text-align: center;
+}
+.clock {
+    width: 300px;
+    height: 160px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.5s ease;
+    background-color: transparent;
 }
 
-#day-icon, #night-icon {
-    font-size: 48px;
-    margin: 20px;
-    transition: transform 0.5s ease, color 0.5s ease;
-    animation: rotateIcon 4s linear infinite;
+.time {
+    font-size: 72px;
+    color: #000000;
+    animation: pulse 1.5s ease infinite;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: color 0.5s ease;
 }
 
-@keyframes rotateIcon {
-    0% { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(-5px) rotate(360deg); }
+.time {
+    font-size: 72px;
+    color: #000000;
+    animation: pulse 1.5s ease infinite;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    transition: color 0.5s ease;
 }
 
-.sunrise-sunset {
-    animation: sunriseSunset 10s infinite alternate;
+.date {
+    font-size: 24px;
+    margin-top: 20px;
+    color: #000000;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes sunriseSunset {
-    0% { transform: translateY(0); color: #FFD700; }
-    100% { transform: translateY(-5px); color: #FF4500; }
+.hidden {
+    display: none;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
