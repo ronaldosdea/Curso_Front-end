@@ -8,27 +8,22 @@
 </head>
 <body>
     <h1>Cronômetro </h1>
-    <div id="container">
-        <div id="display-container">
-            <div id="display">00:00:00</div>
+    <div class="container">
+        <div class="container">
+            <div class="timer">
+                <span id="display">00:00:00.000</span>
+            </div>
+            <div class="controls">
+                <button id="start">Iniciar</button>
+                <button id="pause">Pausar</button>
+                <button id="resume">Retomar</button>
+                <button id="reset">Redefinir</button>
+            </div>
+            <div class="set-time">
+                <input type="text" id="initial-time" placeholder="Tempo inicial (HH:MM:SS)">
+                <button id="set-initial-time">Definir Tempo Inicial</button>
+            </div>
         </div>
-        <div id="buttons">
-            <button id="start">Iniciar</button>
-            <button id="stop">Parar</button>
-            <button id="continue">Continuar</button>
-            <button id="reset">Zerar</button>
-            <button id="lapButton">Volta</button>
-        </div>
-        <div id="lap">
-            Voltas:
-            <ul id="lapList"></ul>
-        </div>
-        <div id="timeLimitLabel">
-            Definir tempo limite (em segundos):
-            <input type="number" id="timeLimitInput" min="0" value="1000">
-        </div>
-    </div>
-    
 
     <script src="script.js"></script>
 </body>

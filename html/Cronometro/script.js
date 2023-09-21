@@ -1,115 +1,92 @@
+let startTime;
+let interval;
+let isRunning = false;
+let elapsedTime = 0;
+
 const display = document.getElementById("display");
-        const startButton = document.getElementById("start");
-        const stopButton = document.getElementById("stop");
-        const continueButton = document.getElementById("continue");
-        const resetButton = document.getElementById("reset");
-        const lapButton = document.getElementById("lapButton");
-        const lapList = document.getElementById("lapList");
-        const timeLimitInput = document.getElementById("timeLimitInput");
+const startButton = document.getElementById("start");
+const pauseButton = document.getElementById("pause");
+const resumeButton = document.getElementById("resume");
+const resetButton = document.getElementById("reset");
+const setTimeButton = document.getElementById("set-initial-time");
+const initialTimeInput = document.getElementById("initial-time");
 
-        let timer;
-        let isRunning = false;
-        let seconds = 0;
-        let minutes = 0;
-        let hours = 0;
-        let lapCounter = 1;
+function startTimer() {
+    startTime = Date.now() - elapsedTime;
+    interval = setInterval(updateTimer, 10);
+    isRunning = true;
+    setButtonState();
+}
 
-        function startTimer() {
-            isRunning = true;
-            timer = setInterval(updateDisplay, 100);
-            startButton.disabled = true;
-            stopButton.disabled = false;
-            continueButton.disabled = true;
-            resetButton.disabled = true;
-            lapButton.disabled = false;
-            timeLimitInput.disabled = true;
-            const timeLimit = parseInt(timeLimitInput.value) * 100;
-            setTimeout(() => {
-                stopTimer();
-                alert("Tempo limite atingido!");
-            }, timeLimit);
-        }
+function pauseTimer() {
+    clearInterval(interval);
+    isRunning = false;
+    setButtonState();
+}
 
-        function stopTimer() {
-            isRunning = false;
-            clearInterval(timer);
-            startButton.disabled = false;
-            stopButton.disabled = true;
-            continueButton.disabled = false;
-            resetButton.disabled = false;
-            lapButton.disabled = true;
-            timeLimitInput.disabled = false;
-        }
+function resumeTimer() {
+    startTimer();
+}
 
-        function continueTimer() {
-            if (!isRunning) {
-                isRunning = true;
-                timer = setInterval(updateDisplay, 100);
-                startButton.disabled = true;
-                stopButton.disabled = false;
-                continueButton.disabled = true;
-                resetButton.disabled = true;
-                lapButton.disabled = false;
-                timeLimitInput.disabled = true;
-            }
-        }
+function resetTimer() {
+    clearInterval(interval);
+    isRunning = false;
+    elapsedTime = 0;
+    updateDisplay();
+    setButtonState();
+}
 
-        function resetTimer() {
-            stopTimer();
-            seconds = 0;
-            minutes = 0;
-            hours = 0;
-            updateDisplay();
-            lapList.innerHTML = "";
-            lapCounter = 1;
-            startButton.disabled = false;
-            resetButton.disabled = true;
-            timeLimitInput.disabled = false;
-        }
-
-        function lap() {
-            if (isRunning) {
-                const lapTime = `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
-                const lapItem = document.createElement("li");
-                lapItem.textContent = `Volta ${lapCounter}: ${lapTime}`;
-                lapList.appendChild(lapItem);
-                lapCounter++;
-            }
-        }
-        function updateDisplay() {
-    seconds++;
-    if (seconds === 60) {
-        seconds = 0;
-        minutes++;
-        if (minutes === 60) {
-            minutes = 0;
-            hours++;
-            if (hours === 24) {
-                hours = 0; 
-            }
-        }
-    }
-
-    const formattedTime = `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
-    display.textContent = formattedTime;
-    
-    if (hours === 0 && minutes === 0 && seconds === 0) {
-        resetTimerDisplay();
+function setInitialTime() {
+    const initialTime = parseTimeInput(initialTimeInput.value);
+    if (initialTime !== null) {
+        elapsedTime = initialTime;
+        updateDisplay();
     }
 }
 
-function resetTimerDisplay() {
-    display.textContent = "00:00:00";
+function updateTimer() {
+    const currentTime = Date.now();
+    elapsedTime = currentTime - startTime;
+    updateDisplay();
 }
 
-function padZero(value) {
-    return value < 10 ? `0${value}` : value;
+function updateDisplay() {
+    display.textContent = formatTime(elapsedTime);
 }
 
-        startButton.addEventListener("click", startTimer);
-        stopButton.addEventListener("click", stopTimer);
-        continueButton.addEventListener("click", continueTimer);
-        resetButton.addEventListener("click", resetTimer);
-        lapButton.addEventListener("click", lap);
+function formatTime(time) {
+    const date = new Date(time);
+    const hours = String(date.getUTCHours()).padStart(2, "0");
+    const minutes = String(date.getUTCMinutes()).padStart(2, "0");
+    const seconds = String(date.getUTCSeconds()).padStart(2, "0");
+    const milliseconds = String(date.getUTCMilliseconds()).padStart(3, "0");
+    return `${hours}:${minutes}:${seconds}.${milliseconds}`;
+}
 
+function parseTimeInput(input) {
+    const regex = /^(\d{2}):(\d{2}):(\d{2})$/;
+    const match = input.match(regex);
+    if (match) {
+        const hours = parseInt(match[1], 10);
+        const minutes = parseInt(match[2], 10);
+        const seconds = parseInt(match[3], 10);
+        return (hours * 3600 + minutes * 60 + seconds) * 1000;
+    }
+    return null;
+}
 
+function setButtonState() {
+    startButton.disabled = isRunning;
+    pauseButton.disabled = !isRunning;
+    resumeButton.disabled = isRunning;
+    resetButton.disabled = isRunning;
+    setTimeButton.disabled = isRunning;
+    initialTimeInput.disabled = isRunning;
+}
+
+startButton.addEventListener("click", startTimer);
+pauseButton.addEventListener("click", pauseTimer);
+resumeButton.addEventListener("click", resumeTimer);
+resetButton.addEventListener("click", resetTimer);
+setTimeButton.addEventListener("click", setInitialTime);
+setButtonState();
