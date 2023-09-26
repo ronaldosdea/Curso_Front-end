@@ -17,3 +17,4 @@ document.querySelector("#section-2 form").addEventListener("submit", (e) => {
     const commentText = document.querySelector("#comment-text").value;
     // Implemente a lógica para exibir o comentário na página.
 });
+ 
