@@ -1,20 +1,36 @@
-// JavaScript para funcionalidades interativas (a serem implementadas)
+document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
 
-// Exemplo de código para abrir janelas com informações dos tratamentos ao clicar nos links do menu.
-document.querySelector("#tratamentos-face a").addEventListener("click", () => {
-    // Implemente a lógica para exibir as informações de tratamentos faciais.
-});
+    // Função para abrir/fechar o menu em dispositivos móveis
+    menuToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('show');
+    });
 
-// Exemplo de código para validar o formulário de consulta e processar os dados.
-document.querySelector("#consulta form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    // Implemente a lógica para validar e processar o formulário de consulta.
-});
+    // Fechar o menu ao clicar em um link
+    const navLinksList = navLinks.querySelectorAll('a');
+    navLinksList.forEach(function (link) {
+        link.addEventListener('click', function () {
+            navLinks.classList.remove('show');
+        });
+    });
 
-// Exemplo de código para comentários de usuários.
-document.querySelector("#section-2 form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const commentText = document.querySelector("#comment-text").value;
-    // Implemente a lógica para exibir o comentário na página.
+    // Rolar suavemente para as seções quando um link do menu é clicado
+    navLinksList.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            if (link.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
 });
- 
