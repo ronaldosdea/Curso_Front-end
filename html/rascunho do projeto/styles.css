@@ -43,55 +43,36 @@ nav ul li a:hover {
     height: 30%;
     
 }
-.card {
-  width: 300px;
-  height: 200px;
-  perspective: 1000px;
+
+.introduction-container {
+  text-align: justify; /* Aplica a justificação ao texto */
+  font-family: Arial, sans-serif; /* Escolha a fonte desejada */
+  font-size: 16px; /* Tamanho da fonte */
+  line-height: 1.5; /* Espaçamento entre linhas */
+  margin: 20px; /* Margem para espaçamento */
+  padding: 20px; /* Preenchimento interno */
+  background-color: #cb6ce6; /* Cor de fundo */
+  border: 1px solid #000000; /* Borda */
+  border-radius: 5px; /* Borda arredondada */
+  
 }
 
-.card-inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.999s;
+/* Estilo para o título da introdução */
+.introduction-title {
+  font-size: 24px; /* Tamanho do título */
+  font-weight: bold; /* Negrito */
+  margin-bottom: 10px; /* Espaçamento abaixo do título */
 }
 
-.card:hover .card-inner {
-  transform: rotateY(180deg);
+/* Estilo para o texto da introdução */
+.introduction-text {
+  font-size: 18px; /* Tamanho do texto */
+  margin-bottom: 10px; /* Espaçamento abaixo do texto */
 }
 
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
 
-.card-front {
-  background-color: #6A2C70;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  border: 10px solid #6A2C70;
-  border-radius: 10px;
-  justify-content: center;
-  font-size: 24px;
-  transform: rotateY(0deg);
-}
 
-.card-back {
-  background-color: #F08A5D;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  border: 10px solid #F08A5D;
-  border-radius: 10px;
-  justify-content: center;
-  font-size: 24px;
-  transform: rotateY(180deg);
-}
+
 
 /* Personalize os estilos conforme necessário */
 
@@ -99,6 +80,7 @@ nav ul li a:hover {
     background-color: #f0f0f0;
     text-align: center;
     padding: 40px 0;
+    
 }
 
 .card {
@@ -122,145 +104,21 @@ nav ul li a:hover {
     justify-content: space-around;
 
 }
-.flip-card {
-    background-color: transparent;
-    width: 200px;
-    height: 254px;
-    perspective: 1000px;
-    font-family: sans-serif;
-  }
-  
-  .title {
-    font-size: 1.5em;
-    font-weight: 900;
-    text-align: center;
-    margin: 0;
-  }
-  
-  .flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-  }
-  
-  .flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-  }
-  
-  .flip-card-front, .flip-card-back {
-    box-shadow: 0 8px 14px 0 rgba(0,0,0,0.2);
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    border: 1px solid rgb(243, 27, 207);
-    border-radius: 1rem;
-  }
-  
-  .flip-card-front {
-    background: linear-gradient(120deg, #ab06d4 60%, #e96ce9 88%,
-       #74067e 40%, #64056d9a 48%);
-    color: #000000;
-  }
-  
-  .flip-card-back {
-    background: linear-gradient(120deg, #ab06d4  30%, #e96ce9 88%,
-    #74067e 40%, #64056d9a 78%);
-    color: #000000;
-    transform: rotateY(180deg);
-  }
-  .rating {
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 0.3rem;
-    --stroke: #666;
-    --fill: #ffc73a;
-  }
-  
-  .rating input {
-    appearance: unset;
-  }
-  
-  .rating label {
-    cursor: pointer;
-  }
-  
-  .rating svg {
-    width: 2rem;
-    height: 2rem;
-    overflow: visible;
-    fill: transparent;
-    stroke: var(--stroke);
-    stroke-linejoin: bevel;
-    stroke-dasharray: 9;
-    animation: idle 4s linear infinite;
-    transition: stroke 0.2s, fill 0.5s;
-    align-items: center;
-  }
-  
-  @keyframes idle {
-    from {
-      stroke-dashoffset: 24;
-    }
-  }
-  
-  .rating label:hover svg {
-    stroke: var(--fill);
-  }
-  
-  .rating input:checked ~ label svg {
-    transition: 0s;
-    animation: idle 4s linear infinite, yippee 0.75s backwards;
-    fill: var(--fill);
-    stroke: var(--fill);
-    stroke-opacity: 0;
-    stroke-dasharray: 0;
-    stroke-linejoin: miter;
-    stroke-width: 8px;
-  }
-  
-  @keyframes yippee {
-    0% {
-      transform: scale(1);
-      fill: var(--fill);
-      fill-opacity: 0;
-      stroke-opacity: 1;
-      stroke: var(--stroke);
-      stroke-dasharray: 10;
-      stroke-width: 1px;
-      stroke-linejoin: bevel;
-    }
-  
-    30% {
-      transform: scale(0);
-      fill: var(--fill);
-      fill-opacity: 0;
-      stroke-opacity: 1;
-      stroke: var(--stroke);
-      stroke-dasharray: 10;
-      stroke-width: 1px;
-      stroke-linejoin: bevel;
-    }
-  
-    30.1% {
-      stroke: var(--fill);
-      stroke-dasharray: 0;
-      stroke-linejoin: miter;
-      stroke-width: 8px;
-    }
-  
-    60% {
-      transform: scale(1.2);
-      fill: var(--fill);
-    }
-  }
+.card {
+  width: 250px;
+  height: 254px;
+  background: #07182E;
+  position: relative;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+
+
+
   
   
 /* Personalize os estilos conforme necessário */
