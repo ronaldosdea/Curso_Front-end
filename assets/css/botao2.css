@@ -1,0 +1,11 @@
+#btn-2{
+    max-width: 12em;
+    border: none;
+    font-size: 18px;
+    padding: 15px 20px;
+    background-color: var(--green);
+    border: none;
+    border-radius: 19px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
